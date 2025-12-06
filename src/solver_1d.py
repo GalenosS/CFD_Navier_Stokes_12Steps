@@ -107,8 +107,8 @@ def burgers_equation(nx=101, nt=100, nu=0.3, sigma=0.2, xtot= 2):
     """
     dx = xtot / (nx - 1)
 
-    limit_convection = dx / 2.5       # Basé sur la vitesse max de la vague (env. 2.0)
-    limit_diffusion = dx**2 / (2*nu)  # Basé sur la viscosité
+    limit_convection = dx / 2.5       # Base sur la vitesse max de la vague
+    limit_diffusion = dx**2 / (2*nu)  # Base sur la viscosite
     
     # On prend le plus petit des deux (le plus prudent)
     dt = sigma * min(limit_convection, limit_diffusion)
