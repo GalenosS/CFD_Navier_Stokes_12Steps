@@ -1,0 +1,16 @@
+# Ignorer les fichiers temporaires Python
+__pycache__/
+*.pyc
+
+# Ignorer les dossiers d'environnement virtuel
+venv/
+env/
+
+# Ignorer les fichiers système Mac/Windows
+.DS_Store
+Thumbs.db
+
+# Ignorer les dossiers temporaires Visual Studio
+.vs/
+*.sln
+*.suo
