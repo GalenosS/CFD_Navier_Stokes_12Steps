@@ -1,4 +1,4 @@
-!\[Alt text](results/final\_cavity\_flow.png)
+!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.png/final\_cavity\_flow.png)
 
 
 
@@ -54,9 +54,9 @@ Validation : Comparaison directe avec la solution analytique théorique.
 
 
 
-!\[Alt text](results/channel\_flow\_profile.png)
+!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.png)
 
-!\[Alt text](results/channel\_speed\_vectors.png)
+!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.pngchannel\_speed\_vectors.png)
 
 ### Aspects physiques \& mathématiques
 
