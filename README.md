@@ -1,10 +1,8 @@
-!\[alt text](results/final\_cavity\_flow.png "final\_cavity\_flow")
+!\[Alt text](results/final\_cavity\_flow.png)
 
 
 
-
-
-\# Python CFD Solver: De la convection linéaire en 1D à Navier-Stokes en 2D
+# Python CFD Solver: De la convection linéaire en 1D à Navier-Stokes en 2D
 
 
 
@@ -12,17 +10,15 @@ Ce projet est une implémentation complète d'un solveur de mécanique des fluid
 
 
 
-L'objectif est de démontrer la progression numérique depuis une simple convection linéaire 1D jusqu'à la résolution complète des équations de Navier-Stokes en 2D pour simuler un écoulement en cavité entraînée (Lid-Driven Cavity Flow) ou en canal (channel flow).
+L'objectif est de démontrer la progression numérique depuis une simple convection linéaire 1D jusqu'à la résolution complète des équations de Navier-Stokes en 2D pour simuler un écoulement en cavité entraînée (Lid-Driven Cavity Flow) ou en canal (Channel Flow).
 
 
 
-
-
-\# Résultats Finaux :
+## Résultats Finaux
 
 
 
-I- Cavité Entraînée (Step 10)
+### I - Cavité Entraînée
 
 
 
@@ -38,9 +34,31 @@ Couleurs : Champ de pression (Gradients).
 
 
 
+!\[Alt text](results/final\_cavity\_flow.png)
 
 
-\# Aspects physique \& mathématiques
+
+### II- Ecoulement dans un canal
+
+
+
+Simulation d'un écoulement de Poiseuille entre deux parois fixes (Channel Flow).
+
+
+
+Vecteurs : Développement du profil de vitesse parabolique.
+
+
+
+Validation : Comparaison directe avec la solution analytique théorique.
+
+
+
+!\[Alt text](results/channel\_flow\_profile.png)
+
+!\[Alt text](results/channel\_speed\_vectors.png)
+
+### Aspects physiques \& mathématiques
 
 
 
@@ -56,9 +74,7 @@ $$\\frac{\\partial^2 p}{\\partial x^2} + \\frac{\\partial^2 p}{\\partial y^2} = 
 
 
 
-
-
-\# Structure du Projet
+## Structure du Projet
 
 
 
@@ -70,15 +86,19 @@ L'architecture sépare la logique de calcul (src) de la visualisation (notebooks
 
 ├── src/               # Moteur de calcul (Librairie)
 
-│   ├── solver\_1d.py   # Algorithmes 1D (Convection, Convection non linéaire, Diffusion, Burgers)
+│   ├── solver\_1d.py   # Algorithmes 1D (Convection, Burgers...)
 
 │   └── solver\_2d.py   # Algorithmes 2D (Laplace, Poisson, Navier-Stokes)
+
+│
 
 ├── notebooks/         # Scripts d'exécution et de visualisation
 
 │   ├── 01\_...         # Progression étape par étape
 
 │   └── 10\_cavity\_flow.py # Le script principal
+
+│
 
 ├── results/           # Résultats et images générées
 
@@ -88,17 +108,15 @@ L'architecture sépare la logique de calcul (src) de la visualisation (notebooks
 
 
 
-
-
-\# Installation et Usage
-
-
-
-Cloner le dépôt :
+## Installation et Usage
 
 
 
-git clone \[https://github.com/GalenoS/CFD\_Navier\_Stokes\_12Steps.git](https://github.com/VOTRE\_PSEUDO/CFD\_Navier\_Stokes\_12Steps.git)
+### Cloner le dépôt :
+
+
+
+git clone \[https://github.com/GalenoS/CFD\_Navier\_Stokes\_12Steps.git](https://github.com/GalenoS/CFD\_Navier\_Stokes\_12Steps.git)
 
 cd CFD\_Navier\_Stokes\_12Steps
 
@@ -106,9 +124,7 @@ cd CFD\_Navier\_Stokes\_12Steps
 
 
 
-
-
-Installer les dépendances :
+### Installer les dépendances :
 
 
 
@@ -118,9 +134,7 @@ pip install -r requirements.txt
 
 
 
-
-
-Lancer la simulation finale :
+### Lancer la simulation finale :
 
 
 
@@ -132,7 +146,7 @@ python 10\_cavity\_flow.py
 
 
 
-\# Stack Technique
+## Stack Technique
 
 
 
@@ -150,7 +164,5 @@ Méthode Numérique : Différences finies (Finite Difference Method) explicites.
 
 
 
-
-
-Projet réalisé dans le cadre d'un portfolio d'ingénierie aérospatiale/mécanique.
+***Projet réalisé dans le cadre d'un portfolio d'ingénierie aérospatiale***
 
