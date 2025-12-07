@@ -1,4 +1,4 @@
-!\[alt text](results/final\_cavity\_flow.png)
+![alt text](results/final\_cavity\_flow.png)
 
 
 
@@ -6,7 +6,7 @@
 
 
 
-Ce projet est une implémentation complète d'un solveur de mécanique des fluides (CFD), basée sur le module pédagogique 12 Steps to Navier-Stokes du Pr. Lorena Barba.
+Ce projet est une implémentation complète d'un solveur de mécanique des fluides (CFD), basée sur le module pédagogique 12 Steps to Navier-Stokes du Pr. Lorena Barba (https://github.com/barbagroup/CFDPython)
 
 
 
@@ -34,7 +34,7 @@ Couleurs : Champ de pression (Gradients).
 
 
 
-!\[Alt text](results/final\_cavity\_flow.png)
+![Alt text](results/final\_cavity\_flow.png)
 
 
 
@@ -53,10 +53,9 @@ Vecteurs : Développement du profil de vitesse parabolique.
 Validation : Comparaison directe avec la solution analytique théorique.
 
 
+![Alt text](results/channel\_flow\_profile.png)
 
-!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.png)
-
-!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.pngchannel\_speed\_vectors.png)
+![Alt text](results/channel\_flow\_profile.png)
 
 ### Aspects physiques \& mathématiques
 
