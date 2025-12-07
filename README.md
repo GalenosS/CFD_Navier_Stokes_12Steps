@@ -1,4 +1,10 @@
-Python CFD Solver: From 1D linear to 2D Navier-Stokes
+!\[alt text](results/final\_cavity\_flow.png "final\_cavity\_flow")
+
+
+
+
+
+\# Python CFD Solver: De la convection linéaire en 1D à Navier-Stokes en 2D
 
 
 
@@ -12,7 +18,7 @@ L'objectif est de démontrer la progression numérique depuis une simple convect
 
 
 
-Résultats Finaux : 
+\# Résultats Finaux :
 
 
 
@@ -34,7 +40,7 @@ Couleurs : Champ de pression (Gradients).
 
 
 
-Physique \& Mathématiques
+\# Aspects physique \& mathématiques
 
 
 
@@ -52,7 +58,7 @@ $$\\frac{\\partial^2 p}{\\partial x^2} + \\frac{\\partial^2 p}{\\partial y^2} = 
 
 
 
-Structure du Projet
+\# Structure du Projet
 
 
 
@@ -64,7 +70,7 @@ L'architecture sépare la logique de calcul (src) de la visualisation (notebooks
 
 ├── src/               # Moteur de calcul (Librairie)
 
-│   ├── solver\_1d.py   # Algorithmes 1D (Convection, Diffusion, Burgers)
+│   ├── solver\_1d.py   # Algorithmes 1D (Convection, Convection non linéaire, Diffusion, Burgers)
 
 │   └── solver\_2d.py   # Algorithmes 2D (Laplace, Poisson, Navier-Stokes)
 
@@ -74,7 +80,7 @@ L'architecture sépare la logique de calcul (src) de la visualisation (notebooks
 
 │   └── 10\_cavity\_flow.py # Le script principal
 
-├── results/           # Images générées
+├── results/           # Résultats et images générées
 
 └── requirements.txt   # Dépendances
 
@@ -84,7 +90,7 @@ L'architecture sépare la logique de calcul (src) de la visualisation (notebooks
 
 
 
-Installation et Usage
+\# Installation et Usage
 
 
 
@@ -126,7 +132,7 @@ python 10\_cavity\_flow.py
 
 
 
-Stack Technique
+\# Stack Technique
 
 
 

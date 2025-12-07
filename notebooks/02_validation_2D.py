@@ -237,6 +237,11 @@ plt.title('Channel Flow : Pression (Couleurs) et Vitesse (Flèches)')
 plt.xlabel('X (Longueur du tube)')
 plt.ylabel('Y (Hauteur du tube)')
 
+# Sauvegarde
+if not os.path.exists("../results"):
+    os.makedirs("../results")
+plt.savefig("../results/channel_speed_vectors.png")
+
 # 2. Ajoutons un graphique "Preuve" : Le profil de vitesse à la sortie
 # On prend une coupe verticale à la fin du canal (dernière colonne)
 plt.figure(figsize=(6, 4))
