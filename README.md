@@ -1,4 +1,4 @@
-!\[alt text](results/final\_cavity\_flow.png "final\_cavity\_flow")
+!\[alt text](results/final\_cavity\_flow.png)
 
 
 
