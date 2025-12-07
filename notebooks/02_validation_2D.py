@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 from matplotlib import cm # Pour les couleurs (colormaps)
 import sys
 import numpy as np
+import os
+
 
 # Importation du nouveau solver 2D
 sys.path.append('../src')
@@ -169,7 +171,7 @@ Equation de diffusion non lineaire en 2D.
 
 
 """
-Equation de Navier-Stokes en 2D.
+Equation de Navier-Stokes en cavité ,en 2D.
 """
 
 # --- Simulation ---
@@ -199,5 +201,70 @@ plt.ylabel('Y')
 
 # On force un aspect carré
 plt.axis('scaled')
+
+if not os.path.exists("../results"):
+    os.makedirs("../results")
+plt.savefig("../results/final_cavity_flow.png", dpi=300) # Sauvegarde en HD
+print("Image sauvegardée dans results/final_cavity_flow.png")
+
+plt.show()
+
+
+"""
+Equation de Navier-Stokes en canal ,en 2D.
+"""
+
+# --- Simulation ---
+print("Démarrage de Navier-Stokes (Channel Flow)...")
+# On prend un nu un peu plus fort pour bien voir la couche limite se développer
+X, Y, u, v, p = channel_flow(nx=51, ny=51, nt=500, nit=50, rho=1, nu=0.1, dt=0.001)
+print("Calcul terminé.")
+
+# --- Visualisation ---
+fig = plt.figure(figsize=(11, 7), dpi=100)
+
+# 1. Champ de Pression (Fond coloré) + Vitesse (Flèches)
+# La pression doit diminuer de gauche (haute) à droite (basse) pour pousser le fluide
+contour = plt.contourf(X, Y, p, alpha=0.5, cmap=cm.viridis)
+plt.colorbar(contour, label='Pression')
+
+# Champ de vecteurs
+skip = 2
+plt.quiver(X[::skip, ::skip], Y[::skip, ::skip], 
+           u[::skip, ::skip], v[::skip, ::skip], color='k') # Noir pour le contraste
+
+plt.title('Channel Flow : Pression (Couleurs) et Vitesse (Flèches)')
+plt.xlabel('X (Longueur du tube)')
+plt.ylabel('Y (Hauteur du tube)')
+
+# 2. Ajoutons un graphique "Preuve" : Le profil de vitesse à la sortie
+# On prend une coupe verticale à la fin du canal (dernière colonne)
+plt.figure(figsize=(6, 4))
+
+# Données simulées
+plt.plot(u[:, -1], Y[:, -1], 'r-o', label='Simulation (Sortie)')
+
+# Données théoriques (Profil de Poiseuille)
+# Pour un écoulement entre plaques planes, Umax = 1.5 * Umoy
+# Umoy = 1 (vitesse d'entrée imposée) -> Umax = 1.5
+# H = 2.0 (hauteur du canal)
+# Formule : u(y) = 4 * Umax * (y/H) * (1 - y/H)
+H = 2.0
+u_max_theorique = 1.5 * 1.0 # 1.0 est la vitesse d'entrée
+y_plot = Y[:, -1]
+u_theorique = 4 * u_max_theorique * (y_plot / H) * (1 - y_plot / H)
+
+plt.plot(u_theorique, y_plot, 'k--', linewidth=2, label='Théorie (Poiseuille)')
+
+plt.title('Validation : Profil de vitesse vertical vs Théorie')
+plt.xlabel('Vitesse U')
+plt.ylabel('Position Y')
+plt.grid(True)
+plt.legend()
+
+# Sauvegarde
+if not os.path.exists("../results"):
+    os.makedirs("../results")
+plt.savefig("../results/channel_flow_profile.png")
 
 plt.show()

@@ -153,19 +153,19 @@ def diffusion_2d(nx=31, ny=31, nt=17, nu=0.05, sigma=0.25, xtot=2, ytot=2):
 
 def burgers_2d(nx=41, ny=41, nt=120, nu=0.01, sigma=0.0009, xtot=2, ytot=2):
     """
-    Résout l'équation de Burgers couplée en 2D.
-    Système de 2 équations pour u et v.
+    Resout l'equation de Burgers couplee en 2D.
+    Systeme de 2 equations pour u et v.
     """
     dx = xtot / (nx - 1)
     dy = ytot / (ny - 1)
     
-    # --- SECURITÉ STABILITÉ (CFL) ---
-    # On calcule la limite imposée par la viscosité
+    # --- SECURITe STABILITe (CFL) ---
+    # On calcule la limite imposee par la viscosite
     limit_viscosite = (dx * dy) / nu * sigma
-    # On calcule la limite imposée par la vitesse (Convection)
+    # On calcule la limite imposee par la vitesse (Convection)
     # On suppose une vitesse max d'environ 2.0 m/s (valeur de la bosse)
     vitesse_max = 2.0
-    limit_convection = (dx / vitesse_max) * 0.2  # 0.2 est un facteur de sécurité
+    limit_convection = (dx / vitesse_max) * 0.2  # 0.2 est un facteur de securite
     
     # On prend LE PLUS PETIT des deux pour être sûr de ne pas exploser
     dt = min(limit_viscosite, limit_convection)
@@ -178,7 +178,7 @@ def burgers_2d(nx=41, ny=41, nt=120, nu=0.01, sigma=0.0009, xtot=2, ytot=2):
     u = np.ones((ny, nx))
     v = np.ones((ny, nx))
     
-    # On place le "pavé" de vitesse initiale
+    # On place le "pave" de vitesse initiale
     u[int(0.5/dy):int(1/dy+1), int(0.5/dx):int(1/dx+1)] = 2
     v[int(0.5/dy):int(1/dy+1), int(0.5/dx):int(1/dx+1)] = 2
     
@@ -199,14 +199,14 @@ def burgers_2d(nx=41, ny=41, nt=120, nu=0.01, sigma=0.0009, xtot=2, ytot=2):
                      nu * dt / dx**2 * (un[1:-1, 2:] - 2 * un[1:-1, 1:-1] + un[1:-1, :-2]) +
                      nu * dt / dy**2 * (un[2:, 1:-1] - 2 * un[1:-1, 1:-1] + un[:-2, 1:-1]))
 
-        # On fait exactement pareil pour v (en remplaçant u par v dans les dérivées)
+        # On fait exactement pareil pour v (en remplaçant u par v dans les derivees)
         v[1:-1, 1:-1] = (vn[1:-1, 1:-1] -
                      dt / dx * un[1:-1, 1:-1] * (vn[1:-1, 1:-1] - vn[1:-1, :-2]) -
                      dt / dy * vn[1:-1, 1:-1] * (vn[1:-1, 1:-1] - vn[:-2, 1:-1]) +
                      nu * dt / dx**2 * (vn[1:-1, 2:] - 2 * vn[1:-1, 1:-1] + vn[1:-1, :-2]) +
                      nu * dt / dy**2 * (vn[2:, 1:-1] - 2 * vn[1:-1, 1:-1] + vn[:-2, 1:-1]))
                      
-        # Conditions aux limites (Murs à 1)
+        # Conditions aux limites (Murs a 1)
         u[0, :] = 1; u[-1, :] = 1; u[:, 0] = 1; u[:, -1] = 1
         v[0, :] = 1; v[-1, :] = 1; v[:, 0] = 1; v[:, -1] = 1
         
@@ -214,9 +214,9 @@ def burgers_2d(nx=41, ny=41, nt=120, nu=0.01, sigma=0.0009, xtot=2, ytot=2):
 
 def laplace_2d(nx=31, ny=31, l1norm_target=1e-4, xtot=2, ytot=1):
     """
-    Résout l'équation de Laplace (∇²p = 0) par méthode itérative.
+    Resout l'equation de Laplace (∇²p = 0) par methode iterative.
     Args:
-        l1norm_target (float): Critère d'arrêt (précision voulue).
+        l1norm_target (float): Critere d'arrêt (precision voulue).
     """
     dx = xtot / (nx - 1)
     dy = ytot / (ny - 1)
@@ -225,8 +225,8 @@ def laplace_2d(nx=31, ny=31, l1norm_target=1e-4, xtot=2, ytot=1):
     p = np.zeros((ny, nx))
     
     # Conditions aux limites initiales (Boundary Conditions)
-    # x=0 : p=0 (Côté gauche)
-    # x=2 : y (Linéaire, côté droit)
+    # x=0 : p=0 (Côte gauche)
+    # x=2 : y (Lineaire, côte droit)
     # y=0 : p=0 (Bas)
     # y=1 : p=0 (Haut)
     x = np.linspace(0, xtot, nx)
@@ -237,7 +237,7 @@ def laplace_2d(nx=31, ny=31, l1norm_target=1e-4, xtot=2, ytot=1):
     # p = y sur le bord droit
     p[:, -1] = y 
 
-    # Boucle Itérative (On ne boucle pas sur le temps, mais sur la convergence)
+    # Boucle Iterative (On ne boucle pas sur le temps, mais sur la convergence)
     l1norm = 1
     it = 0
     
@@ -249,13 +249,13 @@ def laplace_2d(nx=31, ny=31, l1norm_target=1e-4, xtot=2, ytot=1):
                           dx**2 * (pn[2:, 1:-1] + pn[:-2, 1:-1])) /
                          (2 * (dx**2 + dy**2)))
         
-        # Ré-imposition des conditions aux limites à chaque tour
+        # Re-imposition des conditions aux limites a chaque tour
         p[:, 0] = 0        # Gauche (p=0)
         p[:, -1] = y       # Droite (p=y)
         p[0, :] = p[1, :]  # Bas (Neumann: dp/dy = 0 -> p[0] = p[1])
         p[-1, :] = p[-2, :]# Haut (Neumann: dp/dy = 0)
         
-        # Calcul de l'erreur (différence entre l'étape k et k+1)
+        # Calcul de l'erreur (difference entre l'etape k et k+1)
         l1norm = (np.sum(np.abs(p[:]) - np.abs(pn[:])) / np.sum(np.abs(pn[:])))
         it += 1
 
@@ -264,8 +264,8 @@ def laplace_2d(nx=31, ny=31, l1norm_target=1e-4, xtot=2, ytot=1):
 
 def poisson_2d(nx=50, ny=50, nt=100, xtot=2, ytot=2):
     """
-    Résout l'équation de Poisson (∇²p = b).
-    Nous allons créer deux 'spikes' dans le terme source b.
+    Resout l'equation de Poisson (∇²p = b).
+    Nous allons creer deux 'spikes' dans le terme source b.
     """
     dx = xtot / (nx - 1)
     dy = ytot / (ny - 1)
@@ -278,16 +278,16 @@ def poisson_2d(nx=50, ny=50, nt=100, xtot=2, ytot=2):
     p = np.zeros((ny, nx))
     b = np.zeros((ny, nx))
     
-    # --- Création de la Source b ---
-    # On place deux pics à des endroits précis (1/4 et 3/4 du domaine)
+    # --- Creation de la Source b ---
+    # On place deux pics a des endroits precis (1/4 et 3/4 du domaine)
     b[int(ny / 4), int(nx / 4)]  = 100  # Source (Pousse fort)
     b[int(3 * ny / 4), int(3 * nx / 4)] = -100 # Puits (Aspire fort)
 
-    # Boucle Itérative (Pseudo-temps pour relaxer la pression)
+    # Boucle Iterative (Pseudo-temps pour relaxer la pression)
     for n in range(nt):
         pn = p.copy()
         
-        # La formule magique de Poisson discrétisée :
+        # La formule magique de Poisson discretisee :
         # p_new = (Moyenne_Voisins - b * dx^2)
         
         p[1:-1, 1:-1] = (((pn[1:-1, 2:] + pn[1:-1, :-2]) * dy**2 +
@@ -306,9 +306,9 @@ def poisson_2d(nx=50, ny=50, nt=100, xtot=2, ytot=2):
 
 def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
     """
-    Résout les équations de Navier-Stokes pour l'écoulement en cavité.
+    Resout les equations de Navier-Stokes pour l'ecoulement en cavite.
     Args:
-        nit (int): Nombre d'itérations internes pour résoudre la pression (Poisson).
+        nit (int): Nombre d'iterations internes pour resoudre la pression (Poisson).
     """
     xtot, ytot = 2, 2
     dx = xtot / (nx - 1)
@@ -318,7 +318,7 @@ def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
     y = np.linspace(0, ytot, ny)
     X, Y = np.meshgrid(x, y)
 
-    # Initialisation : Tout est à zéro au début
+    # Initialisation : Tout est a zero au debut
     u = np.zeros((ny, nx))
     v = np.zeros((ny, nx))
     p = np.zeros((ny, nx)) 
@@ -330,7 +330,7 @@ def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
         vn = v.copy()
         
         # --- ETAPE 1 : Calcul du terme Source 'b' pour Poisson ---
-        # C'est la divergence de la vitesse qui crée la pression
+        # C'est la divergence de la vitesse qui cree la pression
         b[1:-1, 1:-1] = (rho * (1 / dt * ((un[1:-1, 2:] - un[1:-1, 0:-2]) / (2 * dx) + 
                          (vn[2:, 1:-1] - vn[0:-2, 1:-1]) / (2 * dy)) -
                         ((un[1:-1, 2:] - un[1:-1, 0:-2]) / (2 * dx))**2 -
@@ -338,7 +338,7 @@ def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
                              (vn[1:-1, 2:] - vn[1:-1, 0:-2]) / (2 * dx)) -
                         ((vn[2:, 1:-1] - vn[0:-2, 1:-1]) / (2 * dy))**2))
 
-        # --- ETAPE 2 : Résolution de la Pression (Boucle interne Poisson) ---
+        # --- ETAPE 2 : Resolution de la Pression (Boucle interne Poisson) ---
         for q in range(nit):
             pn = p.copy()
             p[1:-1, 1:-1] = (((pn[1:-1, 2:] + pn[1:-1, 0:-2]) * dy**2 + 
@@ -347,12 +347,12 @@ def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
                              dx**2 * dy**2 / (2 * (dx**2 + dy**2)) * b[1:-1, 1:-1])
 
             # Conditions aux limites pour la Pression (dp/dn = 0 aux murs)
-            p[:, -1] = p[:, -2] # dp/dx = 0 à x = 2
-            p[0, :] = p[1, :]   # dp/dy = 0 à y = 0
-            p[:, 0] = p[:, 1]   # dp/dx = 0 à x = 0
-            p[-1, :] = 0        # p = 0 à y = 2 (Couvercle) -> Référence de pression
+            p[:, -1] = p[:, -2] # dp/dx = 0 a x = 2
+            p[0, :] = p[1, :]   # dp/dy = 0 a y = 0
+            p[:, 0] = p[:, 1]   # dp/dx = 0 a x = 0
+            p[-1, :] = 0        # p = 0 a y = 2 (Couvercle) -> Reference de pression
 
-        # --- ETAPE 3 : Mise à jour des Vitesses (Navier-Stokes) ---
+        # --- ETAPE 3 : Mise a jour des Vitesses (Navier-Stokes) ---
         # u = u_prev + Convection + Pression + Diffusion
         u[1:-1, 1:-1] = (un[1:-1, 1:-1]-
                          un[1:-1, 1:-1] * dt / dx *
@@ -388,5 +388,93 @@ def cavity_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
         
         # LE COUVERCLE MOBILE (Lid)
         u[-1, :] = 1  # Vitesse u = 1 tout en haut (y=2)
+
+    return X, Y, u, v, p
+
+def channel_flow(nx=41, ny=41, nt=500, nit=50, rho=1, nu=0.1, dt=0.001):
+    """
+    Resout Navier-Stokes pour un ecoulement en canal (Channel Flow).
+    Entree a gauche (u=1), Sortie libre a droite, Murs en haut et bas.
+    """
+    # Pour un canal, on veut souvent un domaine plus long que haut
+    # On fixe arbitrairement ici, mais vous pouvez le passer en parametre
+    xtot, ytot = 10.0, 2.0 
+    dx = xtot / (nx - 1)
+    dy = ytot / (ny - 1)
+    
+    x = np.linspace(0, xtot, nx)
+    y = np.linspace(0, ytot, ny)
+    X, Y = np.meshgrid(x, y)
+
+    # Initialisation
+    u = np.zeros((ny, nx))
+    v = np.zeros((ny, nx))
+    p = np.zeros((ny, nx)) 
+    b = np.zeros((ny, nx))
+    
+    # BOUCLE TEMPORELLE
+    for n in range(nt):
+        un = u.copy()
+        vn = v.copy()
+        
+        # --- ETAPE 1 : Terme Source 'b' ---
+        b[1:-1, 1:-1] = (rho * (1 / dt * ((un[1:-1, 2:] - un[1:-1, 0:-2]) / (2 * dx) + 
+                         (vn[2:, 1:-1] - vn[0:-2, 1:-1]) / (2 * dy)) -
+                        ((un[1:-1, 2:] - un[1:-1, 0:-2]) / (2 * dx))**2 -
+                        2 * ((un[2:, 1:-1] - un[0:-2, 1:-1]) / (2 * dy) *
+                             (vn[1:-1, 2:] - vn[1:-1, 0:-2]) / (2 * dx)) -
+                        ((vn[2:, 1:-1] - vn[0:-2, 1:-1]) / (2 * dy))**2))
+
+        # --- ETAPE 2 : Poisson Pression ---
+        for q in range(nit):
+            pn = p.copy()
+            p[1:-1, 1:-1] = (((pn[1:-1, 2:] + pn[1:-1, 0:-2]) * dy**2 + 
+                              (pn[2:, 1:-1] + pn[0:-2, 1:-1]) * dx**2) /
+                             (2 * (dx**2 + dy**2)) -
+                             dx**2 * dy**2 / (2 * (dx**2 + dy**2)) * b[1:-1, 1:-1])
+
+            # BC Pression :
+            # Sortie (Droite) : p = 0 (Pression atmospherique de reference)
+            p[:, -1] = 0
+            
+            # Entree (Gauche) : dp/dx = 0 
+            p[:, 0] = p[:, 1]
+            
+            # Murs (Haut/Bas) : dp/dy = 0
+            p[0, :] = p[1, :]
+            p[-1, :] = p[-2, :]
+
+        # --- ETAPE 3 : Navier-Stokes (Momentum) ---
+        u[1:-1, 1:-1] = (un[1:-1, 1:-1]-
+                         un[1:-1, 1:-1] * dt / dx * (un[1:-1, 1:-1] - un[1:-1, 0:-2]) -
+                         vn[1:-1, 1:-1] * dt / dy * (un[1:-1, 1:-1] - un[0:-2, 1:-1]) -
+                         dt / (2 * rho * dx) * (p[1:-1, 2:] - p[1:-1, 0:-2]) +
+                         nu * (dt / dx**2 * (un[1:-1, 2:] - 2 * un[1:-1, 1:-1] + un[1:-1, 0:-2]) +
+                               dt / dy**2 * (un[2:, 1:-1] - 2 * un[1:-1, 1:-1] + un[0:-2, 1:-1])))
+
+        v[1:-1, 1:-1] = (vn[1:-1, 1:-1] -
+                         un[1:-1, 1:-1] * dt / dx * (vn[1:-1, 1:-1] - vn[1:-1, 0:-2]) -
+                         vn[1:-1, 1:-1] * dt / dy * (vn[1:-1, 1:-1] - vn[0:-2, 1:-1]) -
+                         dt / (2 * rho * dy) * (p[2:, 1:-1] - p[0:-2, 1:-1]) +
+                         nu * (dt / dx**2 * (vn[1:-1, 2:] - 2 * vn[1:-1, 1:-1] + vn[1:-1, 0:-2]) +
+                               dt / dy**2 * (vn[2:, 1:-1] - 2 * vn[1:-1, 1:-1] + vn[0:-2, 1:-1])))
+
+        # BC Vitesses :
+        # Murs (Haut/Bas) : No-slip (u=0, v=0)
+        u[0, :]  = 0
+        u[-1, :] = 0
+        v[0, :]  = 0
+        v[-1, :] = 0
+        
+        # Entree (Gauche) : Vitesse constante u=1 (pour forcer le debit)
+        # Note : On met une petite "couche limite" artificielle pour eviter les discontinuites brutales aux coins
+        u[:, 0]  = 1
+        u[0, 0] = 0; u[-1, 0] = 0 # Coins murs a 0
+        v[:, 0]  = 0
+        
+        # Sortie (Droite) : Neumann (Le fluide sort sans contrainte)
+        # du/dx = 0, dv/dx = 0
+        u[:, -1] = u[:, -2]
+        v[:, -1] = v[:, -2]
 
     return X, Y, u, v, p
