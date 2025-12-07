@@ -55,7 +55,7 @@ Validation : Comparaison directe avec la solution analytique théorique.
 
 ![Alt text](results/channel\_flow\_profile.png)
 
-![Alt text](results/channel\_flow\_profile.png)
+![Alt text](results/channel_speed_vectors.png)
 
 ### Aspects physiques \& mathématiques
 
