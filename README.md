@@ -1,4 +1,4 @@
-!\[Alt text](https://github.com/GalenosS/CFD\_Navier\_Stokes\_12Steps/blob/master/results/channel\_flow\_profile.png/final\_cavity\_flow.png)
+!\[alt text](results/final\_cavity\_flow.png "final\_cavity\_flow")
 
 
 
